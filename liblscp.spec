@@ -1,12 +1,13 @@
-%define	major	5
+%define	major	6
 %define	libname	%mklibname %oname %major
+%define	develname %mklibname %oname -d
 %define old_libname %mklibname %name %major
 %define oname lscp
 
 Name:          liblscp
 Summary:       LinuxSampler Control Protocol (LSCP) wrapper library
-Version:       0.5.5
-Release:       %mkrel 4
+Version:       0.5.6
+Release:       %mkrel 1
 License:       GPL
 Group:	       System/Libraries 
 Source0:       %{name}-%{version}.tar.gz
@@ -36,22 +37,22 @@ LinuxSampler Control Protocol (LSCP) wrapper library
 
 %files -n %libname
 %defattr(-,root,root)
-%_libdir/liblscp.so.5
-%_libdir/liblscp.so.5.0.0
+%_libdir/liblscp.so.%{major}*
 
 #--------------------------------------------------------------------
 
-%package -n	%libname-devel
+%package -n	%develname
 Group: 		Development/Other
 Summary: 	Libraries for %name
 Requires:	%libname = %version-%release
 Provides: 	%{name}-devel = %{version}-%{release}
 Obsoletes:      %old_libname-devel
+Obsoletes:      %{_lib}%{name}5-devel
 
-%description -n	%libname-devel
+%description -n	%develname
 Development libraries from %oname
 
-%files -n %libname-devel
+%files -n %develname
 %defattr (-,root,root)
 %dir %_includedir/lscp
 %_includedir/lscp/*.h
@@ -66,7 +67,7 @@ Development libraries from %oname
 %setup -q -n %name-%version
 
 %build
-%configure
+%configure2_5x
 make
 
 %install
