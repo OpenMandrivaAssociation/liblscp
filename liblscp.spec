@@ -7,12 +7,11 @@
 Name:          liblscp
 Summary:       LinuxSampler Control Protocol (LSCP) wrapper library
 Version:       0.5.6
-Release:       %mkrel 3
+Release:       4
 License:       GPL
 Group:	       System/Libraries 
 Source0:       %{name}-%{version}.tar.gz
 URL: 	       http://www.linuxsampler.org/
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 LinuxSampler Control Protocol (LSCP) wrapper library
@@ -22,21 +21,13 @@ LinuxSampler Control Protocol (LSCP) wrapper library
 %package -n	%libname
 Group: 		System/Libraries
 Summary: 	Libraries for %name
-Provides: 	%name = %version-%release
+Provides: 	%name = %{EVRD}
 Obsoletes:      %old_libname
 
 %description -n %libname 
 LinuxSampler Control Protocol (LSCP) wrapper library
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
-
 %files -n %libname
-%defattr(-,root,root)
 %_libdir/liblscp.so.%{major}*
 
 #--------------------------------------------------------------------
@@ -45,7 +36,7 @@ LinuxSampler Control Protocol (LSCP) wrapper library
 Group: 		Development/Other
 Summary: 	Libraries for %name
 Requires:	%libname = %version-%release
-Provides: 	%{name}-devel = %{version}-%{release}
+Provides: 	%{name}-devel = %{EVRD}
 Obsoletes:      %old_libname-devel
 Obsoletes:      %{_lib}%{oname}5-devel
 
@@ -53,25 +44,53 @@ Obsoletes:      %{_lib}%{oname}5-devel
 Development libraries from %oname
 
 %files -n %develname
-%defattr (-,root,root)
 %dir %_includedir/lscp
 %_includedir/lscp/*.h
 %_libdir/liblscp.a
-%_libdir/liblscp.la
 %_libdir/liblscp.so
 %_libdir/pkgconfig/lscp.pc
 
 #--------------------------------------------------------------------
 
 %prep
-%setup -q -n %name-%version
+%setup -q
 
 %build
 %configure2_5x
-make
+%make
 
 %install
-make DESTDIR=%buildroot  install
+%makeinstall_std
 
-%clean
+
+%changelog
+* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 0.5.6-3mdv2011.0
++ Revision: 620149
+- the mass rebuild of 2010.0 packages
+
+* Fri Aug 28 2009 Emmanuel Andry <eandry@mandriva.org> 0.5.6-2mdv2010.0
++ Revision: 421793
++ rebuild (emptylog)
+
+* Thu Aug 27 2009 Emmanuel Andry <eandry@mandriva.org> 0.5.6-1mdv2010.0
++ Revision: 421760
+- New version 0.5.6
+- apply libraries policy
+- new major 6
+
+* Fri Jul 25 2008 Thierry Vignaud <tv@mandriva.org> 0.5.5-4mdv2009.0
++ Revision: 248973
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Sun Dec 16 2007 Nicolas Lécureuil <nlecureuil@mandriva.com> 0.5.5-2mdv2008.1
++ Revision: 120465
+- Fix packages name
+
+* Sat Dec 15 2007 Nicolas Lécureuil <nlecureuil@mandriva.com> 0.5.5-1mdv2008.1
++ Revision: 120452
+- import liblscp
+
 
