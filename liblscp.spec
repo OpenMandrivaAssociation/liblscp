@@ -7,7 +7,7 @@
 Name:          liblscp
 Summary:       LinuxSampler Control Protocol (LSCP) wrapper library
 Version:       0.5.6
-Release:       4
+Release:       5
 License:       GPL
 Group:	       System/Libraries 
 Source0:       %{name}-%{version}.tar.gz
