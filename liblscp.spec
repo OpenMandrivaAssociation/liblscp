@@ -46,7 +46,7 @@ Development libraries from %oname
 %files -n %develname
 %dir %_includedir/lscp
 %_includedir/lscp/*.h
-%_libdir/liblscp.a
+#_libdir/liblscp.a
 %_libdir/liblscp.so
 %_libdir/pkgconfig/lscp.pc
 
