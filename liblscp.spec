@@ -6,11 +6,13 @@
 
 Name:          liblscp
 Summary:       LinuxSampler Control Protocol (LSCP) wrapper library
-Version:       0.6.1
+Version:       0.6.2
 Release:       1
 License:       GPL
 Group:	       System/Libraries 
-Source0:       http://download.linuxsampler.org/packages/%{name}-%{version}.tar.gz
+Source0:       https://www.rncbc.org/archive/%{name}-%{version}.tar.gz
+# Sources are uploaded with a delay here
+#Source0:       http://download.linuxsampler.org/packages/%{name}-%{version}.tar.gz
 URL: 	       http://www.linuxsampler.org/
 
 %description
