@@ -6,14 +6,16 @@
 
 Name:          liblscp
 Summary:       LinuxSampler Control Protocol (LSCP) wrapper library
-Version:       0.9.4
-Release:       2
+Version:       0.9.5
+Release:       1
 License:       GPL
 Group:	       System/Libraries 
 Source0:       https://www.rncbc.org/archive/%{name}-%{version}.tar.gz
 # Sources are uploaded with a delay here
 #Source0:       http://download.linuxsampler.org/packages/%{name}-%{version}.tar.gz
 URL: 	       http://www.linuxsampler.org/
+
+BuildRequires:  cmake
 
 %description
 LinuxSampler Control Protocol (LSCP) wrapper library
@@ -58,11 +60,11 @@ Development libraries from %oname
 %setup -q
 
 %build
-%configure
+%cmake
 %make_build
 
 %install
-%make_install
+%make_install -C build
 
 
 %changelog
